@@ -44,12 +44,9 @@ fastify.register(mercurius, {
 
 const start = async () => {
   try {
-    await fastify.listen(
-      { port: process.env.PORT, host: process.env.HOSTNAME },
-      err => {
-        if (err) fastify.log.error(err);
-      },
-    );
+    await fastify.listen(process.env.port, err => {
+      if (err) fastify.log.error(err);
+    });
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
