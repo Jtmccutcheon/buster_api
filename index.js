@@ -39,7 +39,7 @@ fastify.register(fastifyEnv, {
 fastify.register(mercurius, {
   schema,
   resolvers,
-  graphiql: true,
+  graphiql: process.env.NODE_ENV !== 'production',
 });
 
 const start = async () => {
