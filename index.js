@@ -4,7 +4,21 @@ const dbConnector = require('./dbConnector');
 const schema = require('./graphql/schema');
 const resolvers = require('./graphql/resolvers');
 
+const whitelist = ['http://localhost:3000', 'http://localhost:4200'];
+
 fastify.register(dbConnector);
+fastify.register(require('fastify-cors'), {
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (whitelist.indexOf(origin) === -1) {
+      const msg = `The CORS policy for this site does not allow access from the specified ${origin}`;
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: 'same-origin',
+  methods: ['POST'],
+});
 fastify.register(mercurius, {
   schema,
   resolvers,
