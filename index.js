@@ -1,14 +1,17 @@
 const fastify = require('fastify')({ logger: true });
 const mercurius = require('mercurius');
-const fastifyEnv = require('fastify-env');
+// const fastifyEnv = require('fastify-env');
 const dbConnector = require('./dbConnector');
 const schema = require('./graphql/schema');
 const resolvers = require('./graphql/resolvers');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const whitelist = [
   'http://localhost:3000',
   'http://localhost:4200',
-  'https://buster-a.herokuapp.com',
+  'https://busterq.herokuapp.com',
 ];
 
 fastify.register(dbConnector);
@@ -24,17 +27,17 @@ fastify.register(require('fastify-cors'), {
   credentials: 'same-origin',
   methods: ['POST'],
 });
-fastify.register(fastifyEnv, {
-  schema: {
-    type: 'object',
-    required: ['PORT', 'MONGO_DB'],
-    properties: {
-      PORT: { type: 'integer' },
-      MONGO_DB: { type: 'string' },
-    },
-  },
-  dotenv: true,
-});
+// fastify.register(fastifyEnv, {
+//   schema: {
+//     type: 'object',
+//     required: ['PORT', 'MONGO_DB'],
+//     properties: {
+//       PORT: { type: 'integer' },
+//       MONGO_DB: { type: 'string' },
+//     },
+//   },
+//   dotenv: true,
+// });
 
 fastify.register(mercurius, {
   schema,
