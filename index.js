@@ -5,7 +5,11 @@ const dbConnector = require('./dbConnector');
 const schema = require('./graphql/schema');
 const resolvers = require('./graphql/resolvers');
 
-const whitelist = ['http://localhost:3000', 'http://localhost:4200'];
+const whitelist = [
+  'http://localhost:3000',
+  'http://localhost:4200',
+  'https://buster-a.herokuapp.com',
+];
 
 fastify.register(dbConnector);
 fastify.register(require('fastify-cors'), {
@@ -40,7 +44,6 @@ fastify.register(mercurius, {
 
 const start = async () => {
   try {
-    console.log(process.env);
     await fastify.listen(
       { port: process.env.PORT, host: process.env.HOSTNAME },
       err => {
