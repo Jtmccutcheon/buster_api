@@ -22,7 +22,7 @@ fastify.register(require('fastify-cors'), {
 fastify.register(mercurius, {
   schema,
   resolvers,
-  graphiql: true,
+  graphiql: process.env.NODE_ENV !== 'production',
 });
 
 const start = async () => {
