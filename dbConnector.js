@@ -4,15 +4,16 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const ConnectDB = async () => {
+const dbConnector = async (fastify, options, done) => {
   try {
     await mongoose.connect(process.env.MONGO_DB, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+    done();
   } catch (error) {
     console.error(error);
   }
 };
 
-module.exports = fp(ConnectDB);
+module.exports = fp(dbConnector);
