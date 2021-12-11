@@ -33,6 +33,12 @@ const resolvers = {
       });
       return find;
     },
+    bustersByUsernames: async (_, obj) => {
+      const { usernames } = obj;
+      const busters = await Busters.find({});
+      const find = busters.filter(b => usernames.includes(b.username));
+      return find;
+    },
   },
 };
 

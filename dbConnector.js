@@ -6,10 +6,14 @@ dotenv.config();
 
 const dbConnector = async (fastify, options, done) => {
   try {
-    await mongoose.connect(process.env.MONGO_DB, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(
+      process.env.MONGO_DB,
+      // process.env.TEST_DB,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+    );
     done();
   } catch (error) {
     console.error(error);
