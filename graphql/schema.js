@@ -1,5 +1,3 @@
-// const { buildSchema } = require('graphql');
-
 const schema = `
     type Query {
         busters: [Buster]!

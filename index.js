@@ -1,5 +1,6 @@
 const fastify = require('fastify')({ logger: true });
 const mercurius = require('mercurius');
+const helmet = require('fastify-helmet');
 const dbConnector = require('./dbConnector');
 const schema = require('./graphql/schema');
 const resolvers = require('./graphql/resolvers');
@@ -14,6 +15,8 @@ const whitelist = [
 ];
 
 fastify.register(dbConnector);
+fastify.register(helmet);
+
 fastify.register(require('fastify-cors'), {
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
