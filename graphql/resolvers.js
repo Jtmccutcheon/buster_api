@@ -39,6 +39,20 @@ const resolvers = {
       const find = busters.filter(b => usernames.includes(b.username));
       return find;
     },
+    bustersByUsernamesWithin: async (_, obj) => {
+      const { usernames, startDate, endDate } = obj;
+      const busters = await Busters.find({});
+      const find = busters.filter(b => {
+        const { datesWon } = b;
+        return (
+          datesWon.filter(d =>
+            moment(d).isBetween(startDate, moment(endDate).endOf('day')),
+          ).length > 0
+        );
+      });
+
+      return find.filter(b => usernames.includes(b.username));
+    },
   },
 };
 
