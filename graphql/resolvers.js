@@ -53,6 +53,15 @@ const resolvers = {
 
       return find.filter(b => usernames.includes(b.username));
     },
+    bustersByYear: async (_, obj) => {
+      const { year } = obj;
+      const busters = await Busters.find({});
+      const find = busters.filter(b => {
+        const { datesWon } = b;
+        return datesWon.filter(d => d.startsWith(year)).length > 0;
+      });
+      return find;
+    },
   },
 };
 

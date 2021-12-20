@@ -12,6 +12,7 @@ const whitelist = [
   'http://localhost:3000',
   'http://localhost:4200',
   'https://busterq.herokuapp.com',
+  'https://codesandbox.io/s/purple-sea-ksf31',
 ];
 
 fastify.register(dbConnector);

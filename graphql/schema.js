@@ -6,6 +6,7 @@ const schema = `
         bustersWithin(startDate: String, endDate: String): [Buster]
         bustersByUsernames(usernames: [String]!): [Buster]
         bustersByUsernamesWithin(usernames: [String]!, startDate: String!, endDate: String! ): [Buster]
+        bustersByYear(year: String): [Buster]
     }
 
     type Buster {
