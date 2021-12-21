@@ -44,14 +44,25 @@ const resolvers = {
       const busters = await Busters.find({});
       const find = busters.filter(b => {
         const { datesWon } = b;
-        return (
-          datesWon.filter(d =>
-            moment(d).isBetween(startDate, moment(endDate).endOf('day')),
-          ).length > 0
+        const dates = datesWon.filter(d =>
+          moment(d).isBetween(startDate, moment(endDate).endOf('day')),
         );
+
+        return dates.length > 0;
       });
 
-      return find.filter(b => usernames.includes(b.username));
+      const busterDoodle = find.map(b => {
+        return {
+          id: b.id,
+          username: b.username,
+          avatarUrl: b.avatarUrl,
+          datesWon: b.datesWon.filter(d =>
+            moment(d).isBetween(startDate, moment(endDate).endOf('day')),
+          ),
+        };
+      });
+
+      return busterDoodle.filter(b => usernames.includes(b.username));
     },
     bustersByYear: async (_, obj) => {
       const { year } = obj;
