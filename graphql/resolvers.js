@@ -31,7 +31,17 @@ const resolvers = {
         );
         return datesWithin.length > 0;
       });
-      return find;
+      const busterDoodle = find.map(b => {
+        return {
+          id: b.id,
+          username: b.username,
+          avatarUrl: b.avatarUrl,
+          datesWon: b.datesWon.filter(d =>
+            moment(d).isBetween(startDate, moment(endDate).endOf('day')),
+          ),
+        };
+      });
+      return busterDoodle;
     },
     bustersByUsernames: async (_, obj) => {
       const { usernames } = obj;
