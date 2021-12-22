@@ -11,7 +11,7 @@ dotenv.config();
 const whitelist = [
   'http://localhost:3000',
   'https://busterq.herokuapp.com',
-  'https://busteranalytics-beta.netlify.app/',
+  'https://busteranalytics-beta.netlify.app',
 ];
 
 fastify.register(dbConnector);
