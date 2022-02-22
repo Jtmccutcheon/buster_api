@@ -26,7 +26,6 @@ fastify.register(require('fastify-cors'), {
     }
     return callback(null, true);
   },
-  credentials: 'same-origin',
   methods: ['POST'],
 });
 
