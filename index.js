@@ -11,6 +11,7 @@ dotenv.config();
 const whitelist = [
   'http://localhost:3000',
   'http://localhost:4200',
+  'https://busterq.herokuapp.com',
   'https://busteranalytics-beta.netlify.app',
 ];
 
@@ -26,7 +27,6 @@ fastify.register(require('fastify-cors'), {
     }
     return callback(null, true);
   },
-  credentials: true,
   methods: ['POST'],
 });
 
