@@ -1,4 +1,6 @@
 const Busters = require('../models/Buster');
+const BusterOTM = require('../models/BusterOTM');
+const BusterOTY = require('../models/BusterOTY');
 const moment = require('moment');
 
 const resolvers = {
@@ -82,6 +84,14 @@ const resolvers = {
         return datesWon.filter(d => d.startsWith(year)).length > 0;
       });
       return find;
+    },
+    bustersOTM: async (_, obj) => {
+      const { month, year } = obj;
+      return BusterOTM.findOne({ year, month });
+    },
+    bustersOTY: async (_, obj) => {
+      const { year } = obj;
+      return BusterOTY.findOne({ year });
     },
   },
 };

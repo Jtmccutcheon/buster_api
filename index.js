@@ -10,16 +10,16 @@ dotenv.config();
 
 const whitelist = [
   'http://localhost:3000',
-  'https://busterq.herokuapp.com',
+  'http://localhost:4200',
   'https://busteranalytics-beta.netlify.app',
 ];
 
 fastify.register(dbConnector);
-fastify.register(helmet);
+fastify.register(helmet); // comment out for graphiql
 
 fastify.register(require('fastify-cors'), {
   origin: (origin, callback) => {
-    if (!origin) return callback(null, true);
+    // if (!origin) return callback(null, true); // uncomment for postman
     if (whitelist.indexOf(origin) === -1) {
       const msg = `The CORS policy for this site does not allow access from the specified ${origin}`;
       return callback(new Error(msg), false);

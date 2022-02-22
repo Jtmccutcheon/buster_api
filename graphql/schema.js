@@ -7,6 +7,8 @@ const schema = `
         bustersByUsernames(usernames: [String]!): [Buster]
         bustersByUsernamesWithin(usernames: [String]!, startDate: String!, endDate: String! ): [Buster]
         bustersByYear(year: String): [Buster]
+        bustersOTM(month: String, year: String): BusterOTM
+        bustersOTY(year: String): BusterOTY
     }
 
     type Buster {
@@ -14,6 +16,17 @@ const schema = `
         username: String!
         avatarUrl: String!
         datesWon: [String]!
+    }
+
+    type BusterOTM {
+        year: String!
+        month: String!
+        busters: [Buster]
+    }
+
+    type BusterOTY {
+        year: String!
+        busters: [Buster]
     }
 `;
 
