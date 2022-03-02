@@ -79,11 +79,13 @@ const resolvers = {
     bustersByYear: async (_, obj) => {
       const { year } = obj;
       const busters = await Busters.find({});
-      const find = busters.filter(b => {
-        const { datesWon } = b;
-        return datesWon.filter(d => d.startsWith(year)).length > 0;
-      });
-      return find;
+
+      return busters.map(b => ({
+        id: b.id,
+        username: b.username,
+        avatarUrl: b.avatarUrl,
+        datesWon: b.datesWon.filter(d => d.startsWith(year)),
+      }));
     },
     bustersOTM: async (_, obj) => {
       const { month, year } = obj;
