@@ -80,7 +80,11 @@ const resolvers = {
       const { year } = obj;
       const busters = await Busters.find({});
 
-      return busters.map(b => ({
+      const filtered = busters.filter(b =>
+        b.datesWon.some(d => d.startsWith(year)),
+      );
+
+      return filtered.map(b => ({
         id: b.id,
         username: b.username,
         avatarUrl: b.avatarUrl,
