@@ -13,6 +13,7 @@ const whitelist = [
   'http://localhost:4200',
   'https://busterq.herokuapp.com',
   'https://busteranalytics-beta.netlify.app',
+  'https://deploy-preview-1--busteranalytics-beta.netlify.app',
 ];
 
 fastify.register(dbConnector);
