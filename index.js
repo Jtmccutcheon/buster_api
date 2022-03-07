@@ -14,6 +14,7 @@ const whitelist = [
   'https://busterq.herokuapp.com',
   'https://busteranalytics-beta.netlify.app',
   'https://deploy-preview-1--busteranalytics-beta.netlify.app',
+  'https://goofy-kowalevski-f19b3a.netlify.app',
 ];
 
 fastify.register(dbConnector);
