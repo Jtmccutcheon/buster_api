@@ -92,12 +92,12 @@ const resolvers = {
       }));
     },
     bustersOTM: async (_, obj) => {
-      const { month, year } = obj;
-      return BusterOTM.findOne({ year, month });
+      const { year } = obj;
+      return BusterOTM.find({ year });
     },
     bustersOTY: async (_, obj) => {
       const { year } = obj;
-      return BusterOTY.findOne({ year });
+      return BusterOTY.find({ year });
     },
   },
 };
