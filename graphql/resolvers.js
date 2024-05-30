@@ -99,6 +99,36 @@ const resolvers = {
       const { year } = obj;
       return BusterOTY.find({ year });
     },
+    busterLongestDry: async () => {
+      const busters = await Busters.find({});
+      const findLongest = busters.map(b => {
+        const days = b?.datesWon
+          ?.sort((x, y) => {
+            return new Date(x) - new Date(y);
+          })
+          .map((d, index) => {
+            const d1 = moment(d);
+            const d2 = moment(b.datesWon[index + 1]) || moment(new Date());
+            return {
+              d1: d1.format('yyyy-MM-DD'),
+              d2: d2.format('yyyy-MM-DD'),
+              diff: d2.diff(d1, 'days'),
+            };
+          });
+
+        const mostDays = Math.max(...days.map(d => d.diff));
+        const longest = days.find(d => d.diff === mostDays);
+
+        return {
+          id: b.id,
+          username: b.username,
+          avatarUrl: b.avatarUrl,
+          discordId: b.discordId,
+          ...longest,
+        };
+      });
+      return findLongest;
+    },
   },
 };
 

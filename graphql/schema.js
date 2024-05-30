@@ -1,4 +1,4 @@
-const schema = `
+const schema = `#graphql
     type Query {
         busters: [Buster]
         buster(id: ID!): Buster!
@@ -9,13 +9,25 @@ const schema = `
         bustersByYear(year: String!): [Buster]
         bustersOTM(year: String!): [BusterOTM]
         bustersOTY(year: String!): [BusterOTY]
+        busterLongestDry: [BusterLongestDry]
     }
 
     type Buster {
         id: ID!
         username: String!
+        discordId: String
         avatarUrl: String!
         datesWon: [String]!
+    }
+
+    type BusterLongestDry {
+        id: ID!
+        username: String!
+        discordId: String
+        avatarUrl: String!
+        d1: String
+        d2: String
+        diff: Int
     }
 
     type BusterOTM {
